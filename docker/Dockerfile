@@ -1,4 +1,4 @@
-FROM ubuntu:bionic
+FROM m.daocloud.io/docker.io/library/ubuntu:bionic
 USER root
 RUN rm -rf /usr/local/bin/mn /usr/local/bin/mnexec \
     /usr/local/lib/python*/*/*mininet* \
@@ -23,7 +23,7 @@ RUN rm -rf /usr/local/bin/mn /usr/local/bin/mnexec \
        bc \
        psmisc \
     && python -m pip install --upgrade pip \
-    && python -m pip install jupyter \
+    && python -m pip install jupyter=="1.0.0" ipywidgets=="7.5.1" \
     && python -m pip install matplotlib=="2.0.2" \
     && python -m pip install keras-rl \
     && python -m pip install --upgrade --user tensorflow==1.13.1 \

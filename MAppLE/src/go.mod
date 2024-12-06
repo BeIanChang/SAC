@@ -4,9 +4,12 @@ go 1.14
 
 require (
 	github.com/atgjack/prob v0.0.0-20161220081030-6cfd5d401186
-	github.com/aunum/gold v0.0.0-20201022151355-225e849d893f // indirect
+	github.com/aunum/gold v0.0.0-20201022151355-225e849d893f
+	github.com/aunum/log v0.0.0-20200321163253-24c356e939b0
 	github.com/bifurcation/mint v0.0.0-20200214151656-93c820e81448
+	github.com/gammazero/deque v0.0.0-20200124200322-7e84b94275b8
 	github.com/golang/mock v1.4.3
+	github.com/google/go-cmp v0.5.4 // indirect
 	github.com/hashicorp/golang-lru v0.5.4
 	github.com/klauspost/cpuid v1.2.3 // indirect
 	github.com/klauspost/reedsolomon v1.9.3
@@ -18,10 +21,9 @@ require (
 	github.com/onsi/gomega v1.9.0
 	github.com/vishvananda/netlink v1.1.0
 	golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9
-	golang.org/x/mod v0.4.1 // indirect
 	golang.org/x/net v0.0.0-20201021035429-f5854403a974
-	golang.org/x/sync v0.0.0-20201207232520-09787c993a3a // indirect
 	golang.org/x/sys v0.0.0-20210124154548-22da62e12c0c // indirect
-	golang.org/x/tools/gopls v0.6.4 // indirect
-	honnef.co/go/tools v0.1.1
+	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1 // indirect
+	gopkg.in/check.v1 v1.0.0-20190902080502-41f04d3bba15 // indirect
+	gorgonia.org/tensor v0.9.4
 )

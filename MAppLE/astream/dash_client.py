@@ -211,14 +211,15 @@ def start_playback_smart(dp_object, domain, playback_type=None, download=False, 
         if "$Bandwidth$" in dp_object.video[bitrate].initialization:
             dp_object.video[bitrate].initialization = dp_object.video[bitrate].initialization.replace(
                 "$Bandwidth$", str(bitrate))
+        print(f"this bitrate: {bitrate}")
         media_urls = [dp_object.video[bitrate].initialization] + dp_object.video[bitrate].url_list
-        #print "media urls"
-        #print media_urls
+        
+        print(f"media_urls{media_urls}")
         for segment_count, segment_url in enumerate(media_urls, dp_object.video[bitrate].start):
-            # segment_duration = dp_object.video[bitrate].segment_duration
+            segment_duration = dp_object.video[bitrate].segment_duration
             #print "segment url"
-            #print segment_url
-            #print(f"bitrate: {bitrate}, seg_no: {segment_count}, url: {segment_url}")
+            print(f"segment_url: {segment_url}")
+            print(f"bitrate: {bitrate}, seg_no: {segment_count}, url: {segment_url}")
             dp_list[segment_count][bitrate] = segment_url
     bitrates = list(dp_object.video.keys())
     bitrates.sort()
@@ -269,6 +270,7 @@ def start_playback_smart(dp_object, domain, playback_type=None, download=False, 
 
                 if dash_player.buffer.qsize() >= config_dash.BASIC_THRESHOLD:
                     delay = dash_player.buffer.qsize() - config_dash.BASIC_THRESHOLD
+                
                 config_dash.LOG.info("Basic-DASH: Selected {} for the segment {}".format(current_bitrate,
                                                                                          segment_number + 1))
             elif playback_type.upper() == "SMART":
@@ -323,12 +325,11 @@ def start_playback_smart(dp_object, domain, playback_type=None, download=False, 
         #print domain
         #print "segment"
         #print segment
-        #print("current bitrate")
+        print(f"current bitrate: {current_bitrate}")
         #print(current_bitrate)
-        #print(segment_path)
+        print(f"segment_path: {segment_path}")
         segment_url = urllib.parse.urljoin(domain, segment_path)
-        #print("segment url")
-        #print(segment_url)
+        print(f"segment_url: {segment_url}")
         config_dash.LOG.info("{}: Segment URL = {}".format(playback_type.upper(), segment_url))
         if delay:
             delay_start = time.time()
@@ -602,6 +603,8 @@ def main():
     dp_object = DashPlayback()
     
     # Reading the MPD file created
+    
+    config_dash.LOG.info('Ready to read mpd_file %s' % mpd_file)
     dp_object, video_segment_duration = read_mpd.read_mpd(mpd_file, dp_object, BITRATE)
     
     config_dash.LOG.info("The DASH media has %d video representations" % len(dp_object.video))

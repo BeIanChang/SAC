@@ -107,14 +107,15 @@ func RLNewEvent(pathID protocol.PathID, packetnumber protocol.PacketNumber, stat
 func SetupThreadRL() {
 	for {
 		time.Sleep(10 * time.Millisecond)
-		// startTime2 := time.Now()
-		// lock.Lock()
-		// startTime1 := time.Now()
+		startTime2 := time.Now()
+		lock.Lock()
+		startTime1 := time.Now()
 		agent.Learn()
-		// time1 := time.Since(startTime1)
-		// lock.Unlock()
-		// time2 := time.Since(startTime2)
+		time1 := time.Since(startTime1)
+		lock.Unlock()
+		time2 := time.Since(startTime2)
 		// goldlog.Infof("학습 소요 시간 %s, Mutex Lock 시간 %s", time1, time2 - time1)
+		goldlog.Infof("Learning time %s, Mutex Lock hour %s", time1, time2 - time1)
 	}
 }
 
@@ -130,7 +131,8 @@ func SetupRL() {
 	agent = newagent
 	require.NoError(err)
 	go SetupThreadRL()
-	goldlog.Infof("쓰레드 실행 명령")
+	// goldlog.Infof("쓰레드 실행 명령")
+	goldlog.Infof("Thread execution command")
 }
 
 func (sch *scheduler) receivedACKForRL(s *session, ackFrame *wire.AckFrame) {
@@ -152,6 +154,7 @@ func (sch *scheduler) receivedACKForRL(s *session, ackFrame *wire.AckFrame) {
 	}
 
 	//goldlog.Infof("	수신 [%d] [계산:%d] %d - %d %d", pathID, ack, lowestack, largetstack, ackFrame.AckRanges)
+	goldlog.Infof("	reception [%d] [calculate:%d] %d - %d %d", pathID, ack, lowestack, largetstack, ackFrame.AckRanges)
 
 	// Repeat for all saved reinforcement learning events	
 	for {
@@ -176,14 +179,17 @@ func (sch *scheduler) receivedACKForRL(s *session, ackFrame *wire.AckFrame) {
 		if (chunk_finished) {
 			rtt := time.Since(FrontData.SendTime) / 2
 
-			goldlog.Infof("[청크 마무리 단계1] %s - %s - %s", duration, rtt, ackFrame.DelayTime)
+			// goldlog.Infof("[청크 마무리 단계1] %s - %s - %s", duration, rtt, ackFrame.DelayTime)
+			goldlog.Infof("[Chunk finishing phase1] %s - %s - %s", duration, rtt, ackFrame.DelayTime)
+
 			// Eliminates the effect of RTT
 			// Why RTT and not one way delay? - HTTP Request (1 owd) + Sent ACK (1 owd)
 			duration -= rtt
 
 			// Eliminates the effect of artificial ACK delay on the client
 			duration -= ackFrame.DelayTime
-			goldlog.Infof("[청크 마무리 단계2] %s %s", duration, bytes)
+			// goldlog.Infof("[청크 마무리 단계2] %s %s", duration, bytes)
+			goldlog.Infof("[Chunk finishing phase2] %s %s", duration, bytes)
 			
 
 
@@ -283,6 +289,7 @@ func (sch *scheduler) storeStateAction(s *session, pathID protocol.PathID, pkt *
 
 
 	// goldlog.Infof("%s 전송 [%d] %d", time.Now(), pathID, packetNumber)
+	goldlog.Infof("%s forwarding [%d] %d", time.Now(), pathID, packetNumber)
 }
 func getHTTPStreamID(s *session) protocol.StreamID {
 	var sid protocol.StreamID = protocol.StreamID(0)
@@ -453,7 +460,9 @@ pathLoop:
 				event := deepq.NewEvent(last_state, outcome.Action, outcome)
 				agent.Remember(event)
 				// goldlog.Infof("딜레이: %s", time.Since(last_scheduling_time).Milliseconds())
-				goldlog.Infof("남은 바이트 %d, 기존 액션 %d 결과 %f 스트림 %d,스테이트 %d -> %d", remain_data, last_action, outcome.Reward, streami, last_state, outcome.Observation)
+				goldlog.Infof("delay: %s", time.Since(last_scheduling_time).Milliseconds())
+				// goldlog.Infof("남은 바이트 %d, 기존 액션 %d 결과 %f 스트림 %d,스테이트 %d -> %d", remain_data, last_action, outcome.Reward, streami, last_state, outcome.Observation)
+				goldlog.Infof("bytes remaining %d, existing action %d result %f state %d -> %d", remain_data, last_action, outcome.Reward, outcome.Observation, state)
 			}
 		}
 		last_action = action

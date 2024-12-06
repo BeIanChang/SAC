@@ -111,18 +111,16 @@ class DashPlayer:
                     buffering = True
                     interruption_start = time.time()
                     config_dash.JSON_HANDLE['playback_info']['interruptions']['count'] += 1
-                # If the size of the buffer is greater than the RE_BUFFERING_DURATION then start playback
                 else:
-                    # If the RE_BUFFERING_DURATION is greate than the remiang length of the video then do not wait
-                    remaining_playback_time = self.playback_duration - self.playback_timer.time()
-                    if ((self.buffer.qsize() >= config_dash.RE_BUFFERING_COUNT) or (
-                            config_dash.RE_BUFFERING_COUNT * self.segment_duration >= remaining_playback_time
-                            and self.buffer.qsize() > 0)):
+                    # Fetch new segments if buffer is not replenished
+                    if self.buffer.qsize() < config_dash.RE_BUFFERING_COUNT:
+                        config_dash.LOG.info("Waiting for buffer to replenish...")
+                        time.sleep(0.1)  # Allow time for segments to be fetched
+                    else:
                         buffering = False
                         if interruption_start:
                             interruption_end = time.time()
                             interruption = interruption_end - interruption_start
-
                             config_dash.JSON_HANDLE['playback_info']['interruptions']['events'].append({
                                 "timeframe": (interruption_start, interruption_end),
                                 "segment_number": self.current_segment['segment_number'],
@@ -132,6 +130,36 @@ class DashPlayer:
                             interruption_start = None
                         self.set_state("PLAY")
                         self.log_entry("Buffering-Play")
+
+            # if self.playback_state == "BUFFERING":
+            #     if not buffering:
+            #         config_dash.LOG.info("Entering buffering stage after {} seconds of playback".format(
+            #             self.playback_timer.time()))
+            #         self.playback_timer.pause()
+            #         buffering = True
+            #         interruption_start = time.time()
+            #         config_dash.JSON_HANDLE['playback_info']['interruptions']['count'] += 1
+            #     # If the size of the buffer is greater than the RE_BUFFERING_DURATION then start playback
+            #     else:
+            #         # If the RE_BUFFERING_DURATION is greate than the remiang length of the video then do not wait
+            #         remaining_playback_time = self.playback_duration - self.playback_timer.time()
+            #         if ((self.buffer.qsize() >= config_dash.RE_BUFFERING_COUNT) or (
+            #                 config_dash.RE_BUFFERING_COUNT * self.segment_duration >= remaining_playback_time
+            #                 and self.buffer.qsize() > 0)):
+            #             buffering = False
+            #             if interruption_start:
+            #                 interruption_end = time.time()
+            #                 interruption = interruption_end - interruption_start
+
+            #                 config_dash.JSON_HANDLE['playback_info']['interruptions']['events'].append({
+            #                     "timeframe": (interruption_start, interruption_end),
+            #                     "segment_number": self.current_segment['segment_number'],
+            #                 })
+            #                 config_dash.JSON_HANDLE['playback_info']['interruptions']['total_duration'] += interruption
+            #                 config_dash.LOG.info("Duration of interruption = {}".format(interruption))
+            #                 interruption_start = None
+            #             self.set_state("PLAY")
+            #             self.log_entry("Buffering-Play")
 
             if self.playback_state == "INITIAL_BUFFERING":
                 if self.buffer.qsize() < config_dash.INITIAL_BUFFERING_COUNT:
@@ -145,83 +173,101 @@ class DashPlayer:
                     self.log_entry("InitialBuffering-Play")
 
             if self.playback_state == "PLAY":
-                    # Check of the buffer has any segments
-                    if self.playback_timer.time() == self.playback_duration:
-                        self.set_state("END")
-                        self.log_entry("Play-End")
-                    if self.buffer.qsize() == 0:
-                        config_dash.LOG.info("Buffer empty after {} seconds of playback".format(
-                            self.playback_timer.time()))
+                # Check of the buffer has any segments
+                if self.playback_timer.time() == self.playback_duration:
+                    self.set_state("END")
+                    self.log_entry("Play-End")
+                if self.buffer.qsize() == 0:
+                    config_dash.LOG.info("Buffer empty after {} seconds of playback".format(
+                        self.playback_timer.time()))
+                    self.playback_timer.pause()
+                    self.set_state("BUFFERING")
+                    self.log_entry("Play-Buffering")
+                    continue
+                # Read one the segment from the buffer
+                # Acquire Lock on the buffer and read a segment for it
+                self.buffer_lock.acquire()
+                play_segment = self.buffer.get()
+                self.current_segment = play_segment
+                self.buffer_lock.release()
+                config_dash.LOG.info("Reading the segment number {} with length {} from the buffer at playtime {}".format(
+                    play_segment['segment_number'], play_segment["playback_length"], self.playback_timer.time()))
+                self.log_entry(action="StillPlaying", bitrate=play_segment["bitrate"])
+
+                # Calculate time playback when the segment finishes
+                future = self.playback_timer.time() + play_segment['playback_length']
+
+                # Start the playback
+                self.playback_timer.start()
+                while self.playback_timer.time() < future:
+                    # If playback hasn't started yet, set the playback_start_time
+                    if not self.playback_start_time:
+                        self.playback_start_time = time.time()
+                        config_dash.LOG.info("Started playing with representation {} at {}".format(
+                            play_segment['bitrate'], self.playback_timer.time()))
+
+                    # Duration for which the video was played in seconds (integer)
+                    if self.playback_timer.time() >= self.playback_duration:
+                        config_dash.LOG.info("Completed the video playback: {} seconds".format(
+                            self.playback_duration))
                         self.playback_timer.pause()
-                        self.set_state("BUFFERING")
-                        self.log_entry("Play-Buffering")
-                        continue
-                    # Read one the segment from the buffer
-                    # Acquire Lock on the buffer and read a segment for it
-                    self.buffer_lock.acquire()
-                    play_segment = self.buffer.get()
-                    self.current_segment = play_segment
-                    self.buffer_lock.release()
-                    config_dash.LOG.info("Reading the segment number {} with length {} from the buffer at playtime {}".format(
-                        play_segment['segment_number'], play_segment["playback_length"], self.playback_timer.time()))
-                    self.log_entry(action="StillPlaying", bitrate=play_segment["bitrate"])
+                        self.set_state("END")
+                        self.log_entry("TheEnd")
+                        return
+                else:
+                    self.buffer_length_lock.acquire()
+                    self.buffer_length -= play_segment['playback_length']
+                    config_dash.LOG.debug("Decrementing buffer_length by {}. dash_buffer = {}".format(
+                        play_segment['playback_length'], self.buffer_length))
+                    self.buffer_length_lock.release()
+                if self.segment_limit:
+                    if int(play_segment['segment_number']) >= self.segment_limit:
+                        self.set_state("STOP")
+                        config_dash.LOG.info("Stopped playback after segment {} at playtime {}".format(
+                            play_segment['segment_number'], self.playback_duration))
+                if self.time_limit is not None:
+                    if self.playback_timer.time() >= self.time_limit:
+                        self.set_state("STOP")
+                        config_dash.LOG.info("Stopped playback after segment {} at playtime {}".format(
+                            play_segment['segment_number'], self.playback_duration))
 
-                    # Calculate time playback when the segment finishes
-                    future = self.playback_timer.time() + play_segment['playback_length']
-
-                    # Start the playback
-                    self.playback_timer.start()
-                    while self.playback_timer.time() < future:
-                        # If playback hasn't started yet, set the playback_start_time
-                        if not self.playback_start_time:
-                            self.playback_start_time = time.time()
-                            config_dash.LOG.info("Started playing with representation {} at {}".format(
-                                play_segment['bitrate'], self.playback_timer.time()))
-
-                        # Duration for which the video was played in seconds (integer)
-                        if self.playback_timer.time() >= self.playback_duration:
-                            config_dash.LOG.info("Completed the video playback: {} seconds".format(
-                                self.playback_duration))
-                            self.playback_timer.pause()
-                            self.set_state("END")
-                            self.log_entry("TheEnd")
-                            return
-                    else:
-                        self.buffer_length_lock.acquire()
-                        self.buffer_length -= play_segment['playback_length']
-                        config_dash.LOG.debug("Decrementing buffer_length by {}. dash_buffer = {}".format(
-                            play_segment['playback_length'], self.buffer_length))
-                        self.buffer_length_lock.release()
-                    if self.segment_limit:
-                        if int(play_segment['segment_number']) >= self.segment_limit:
-                            self.set_state("STOP")
-                            config_dash.LOG.info("Stopped playback after segment {} at playtime {}".format(
-                                play_segment['segment_number'], self.playback_duration))
-                    if self.time_limit is not None:
-                        if self.playback_timer.time() >= self.time_limit:
-                            self.set_state("STOP")
-                            config_dash.LOG.info("Stopped playback after segment {} at playtime {}".format(
-                                play_segment['segment_number'], self.playback_duration))
-
+    # def write(self, segment):
+    #     """ write segment to the buffer.
+    #         Segment is dict with keys ['data', 'bitrate', 'playback_length', 'URI', 'size']
+    #     """
+    #     # Acquire Lock on the buffer and add a segment to it
+    #     if not self.actual_start_time:
+    #         self.actual_start_time = time.time()
+    #         config_dash.JSON_HANDLE['playback_info']['start_time'] = self.actual_start_time
+    #     config_dash.LOG.info("Writing segment {} at time {}".format(segment['segment_number'],
+    #                                                                 time.time() - self.actual_start_time))
+    #     self.buffer_lock.acquire()
+    #     self.buffer.put(segment)
+    #     self.buffer_lock.release()
+    #     self.buffer_length_lock.acquire()
+    #     self.buffer_length += segment['playback_length']
+    #     config_dash.LOG.debug("Incrementing buffer_length by {}. dash_buffer = {}".format(
+    #         segment['playback_length'], self.buffer_length))
+    #     self.buffer_length_lock.release()
+    #     self.log_entry(action="Writing", bitrate=segment['bitrate'])
+    
     def write(self, segment):
-        """ write segment to the buffer.
-            Segment is dict with keys ['data', 'bitrate', 'playback_length', 'URI', 'size']
-        """
-        # Acquire Lock on the buffer and add a segment to it
+        """ write segment to the buffer """
         if not self.actual_start_time:
             self.actual_start_time = time.time()
             config_dash.JSON_HANDLE['playback_info']['start_time'] = self.actual_start_time
-        config_dash.LOG.info("Writing segment {} at time {}".format(segment['segment_number'],
-                                                                    time.time() - self.actual_start_time))
+        config_dash.LOG.info(f"Writing segment {segment['segment_number']} with bitrate {segment['bitrate']} to buffer.")
+        
         self.buffer_lock.acquire()
         self.buffer.put(segment)
         self.buffer_lock.release()
+
         self.buffer_length_lock.acquire()
         self.buffer_length += segment['playback_length']
-        config_dash.LOG.debug("Incrementing buffer_length by {}. dash_buffer = {}".format(
-            segment['playback_length'], self.buffer_length))
+        config_dash.LOG.info(f"Buffer updated. Current size: {self.buffer.qsize()}, Total length: {self.buffer_length}.")
         self.buffer_length_lock.release()
         self.log_entry(action="Writing", bitrate=segment['bitrate'])
+
 
     def start(self):
         """ Start playback"""

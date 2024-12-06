@@ -1,0 +1,370 @@
+ℹ  tracking data in /tmp/stats.3184125952.json
+ℹ  tracking data in /tmp/stats.1529720284.json
+2024-12-06 13:38:48,350 - dash_client.py:599 - INFO - Downloading MPD file https://10.0.0.20:4242/manifest.mpd
+https://10.0.0.20:4242/manifest.mpd
+2024-12-06 13:38:48,435 - dash_client.py:97 - INFO - Downloaded the MPD file
+2024-12-06 13:38:48,436 - dash_client.py:607 - INFO - Ready to read mpd_file <_io.BytesIO object at 0x78a6e877dcc0>
+2024-12-06 13:38:48,436 - read_mpd.py:121 - INFO - Reading the MPD file
+child_period: <Element '{urn:mpeg:dash:schema:mpd:2011}Period' at 0x78a6e871e2c0>
+mpd format 1
+2024-12-06 13:38:48,436 - read_mpd.py:214 - INFO - Found Video
+2024-12-06 13:38:48,436 - read_mpd.py:216 - INFO - Retrieving Media
+2024-12-06 13:38:48,436 - dash_client.py:610 - INFO - The DASH media has 1 video representations
+2024-12-06 13:38:48,436 - dash_client.py:620 - CRITICAL - Started Basic-DASH Playback
+2024-12-06 13:38:48,437 - dash_buffer.py:19 - INFO - Initializing the Buffer
+2024-12-06 13:38:48,437 - dash_buffer.py:51 - INFO - VideoLength=69.8,segmentDuration=5.0,MaxBufferSize=1,InitialBuffer(secs)=1,BufferAlph(secs)=1,BufferBeta(secs)=2
+2024-12-06 13:38:48,437 - dash_buffer.py:62 - INFO - Changing state from INITIALIZED to INITIAL_BUFFERING at 0.0 Playback time 
+2024-12-06 13:38:48,437 - dash_buffer.py:310 - INFO - BufferStats: EpochTime=0,CurrentPlaybackTime=0.0,CurrentBufferSize=0,CurrentPlaybackState=INITIAL_BUFFERING,Action=Starting,Bitrate=0
+2024-12-06 13:38:48,437 - dash_buffer.py:276 - INFO - Starting the Player
+2024-12-06 13:38:48,438 - dash_buffer.py:76 - INFO - Initialized player with video length 69.8
+2024-12-06 13:38:48,453 - dash_buffer.py:310 - INFO - BufferStats: EpochTime=0,CurrentPlaybackTime=0.0,CurrentBufferSize=0,CurrentPlaybackState=INITIAL_BUFFERING,Action=Starting,Bitrate=0
+this bitrate: 10000000
+media_urls['init-stream0.m4s', 'init-stream0.m4s', 'chunk-stream0-00001.m4s', 'chunk-stream0-00002.m4s', 'chunk-stream0-00003.m4s', 'chunk-stream0-00004.m4s', 'chunk-stream0-00005.m4s', 'chunk-stream0-00006.m4s', 'chunk-stream0-00007.m4s', 'chunk-stream0-00008.m4s', 'chunk-stream0-00009.m4s', 'chunk-stream0-00010.m4s', 'chunk-stream0-00011.m4s', 'chunk-stream0-00012.m4s', 'chunk-stream0-00013.m4s', 'chunk-stream0-00001.m4s']
+segment_url: init-stream0.m4s
+bitrate: 10000000, seg_no: 1, url: init-stream0.m4s
+segment_url: init-stream0.m4s
+bitrate: 10000000, seg_no: 2, url: init-stream0.m4s
+segment_url: chunk-stream0-00001.m4s
+bitrate: 10000000, seg_no: 3, url: chunk-stream0-00001.m4s
+segment_url: chunk-stream0-00002.m4s
+bitrate: 10000000, seg_no: 4, url: chunk-stream0-00002.m4s
+segment_url: chunk-stream0-00003.m4s
+bitrate: 10000000, seg_no: 5, url: chunk-stream0-00003.m4s
+segment_url: chunk-stream0-00004.m4s
+bitrate: 10000000, seg_no: 6, url: chunk-stream0-00004.m4s
+segment_url: chunk-stream0-00005.m4s
+bitrate: 10000000, seg_no: 7, url: chunk-stream0-00005.m4s
+segment_url: chunk-stream0-00006.m4s
+bitrate: 10000000, seg_no: 8, url: chunk-stream0-00006.m4s
+segment_url: chunk-stream0-00007.m4s
+bitrate: 10000000, seg_no: 9, url: chunk-stream0-00007.m4s
+segment_url: chunk-stream0-00008.m4s
+bitrate: 10000000, seg_no: 10, url: chunk-stream0-00008.m4s
+segment_url: chunk-stream0-00009.m4s
+bitrate: 10000000, seg_no: 11, url: chunk-stream0-00009.m4s
+segment_url: chunk-stream0-00010.m4s
+bitrate: 10000000, seg_no: 12, url: chunk-stream0-00010.m4s
+segment_url: chunk-stream0-00011.m4s
+bitrate: 10000000, seg_no: 13, url: chunk-stream0-00011.m4s
+segment_url: chunk-stream0-00012.m4s
+bitrate: 10000000, seg_no: 14, url: chunk-stream0-00012.m4s
+segment_url: chunk-stream0-00013.m4s
+bitrate: 10000000, seg_no: 15, url: chunk-stream0-00013.m4s
+segment_url: chunk-stream0-00001.m4s
+bitrate: 10000000, seg_no: 16, url: chunk-stream0-00001.m4s
+[10000000]
+2024-12-06 13:38:48,459 - dash_client.py:246 - INFO -  BASIC: Processing the segment 1
+segment_number =1
+dp_object.video[bitrate].start=1
+current bitrate: 10000000
+segment_path: init-stream0.m4s
+segment_url: https://10.0.0.20:4242/init-stream0.m4s
+2024-12-06 13:38:48,459 - dash_client.py:333 - INFO - BASIC: Segment URL = https://10.0.0.20:4242/init-stream0.m4s
+2024/12/06 13:38:48 PROXY MODULE: created http2 QUIC client (MP: true, rtt)
+debug 1 0
+2024-12-06 13:38:48,510 - dash_client.py:355 - INFO - BASIC: Downloaded segment https://10.0.0.20:4242/init-stream0.m4s
+2024-12-06 13:38:48,515 - dash_client.py:375 - INFO - BASIC : The total downloaded = 0.0, segment_size = 0.0, segment_number = 1
+2024-12-06 13:38:48,520 - dash_buffer.py:259 - INFO - Writing segment 1 with bitrate 10000000 to buffer.
+2024-12-06 13:38:48,526 - dash_buffer.py:267 - INFO - Buffer updated. Current size: 1, Total length: 5.0.
+2024-12-06 13:38:48,526 - dash_buffer.py:169 - INFO - Initial Waiting Time = 0.08823847770690918
+2024-12-06 13:38:48,526 - dash_buffer.py:62 - INFO - Changing state from INITIAL_BUFFERING to PLAY at 0.0 Playback time 
+2024-12-06 13:38:48,526 - dash_buffer.py:310 - INFO - BufferStats: EpochTime=0.0054836273193359375,CurrentPlaybackTime=0.0,CurrentBufferSize=1,CurrentPlaybackState=PLAY,Action=Writing,Bitrate=10000000
+2024-12-06 13:38:48,527 - dash_buffer.py:310 - INFO - BufferStats: EpochTime=0.0056629180908203125,CurrentPlaybackTime=0.0,CurrentBufferSize=1,CurrentPlaybackState=PLAY,Action=InitialBuffering-Play,Bitrate=0
+2024-12-06 13:38:48,527 - dash_client.py:390 - INFO - Downloaded https://10.0.0.20:4242/init-stream0.m4s. Size = 0.0 in 0.045336338999732106 seconds
+2024-12-06 13:38:48,527 - dash_buffer.py:193 - INFO - Reading the segment number 1 with length 5.0 from the buffer at playtime 0.0
+2024-12-06 13:38:48,527 - dash_client.py:246 - INFO -  BASIC: Processing the segment 2
+segment_number =2
+dp_object.video[bitrate].start=1
+2024-12-06 13:38:48,527 - basic_dash3.py:62 - INFO - Basic Adaptation: Download Rate = 0.0, next_bitrate = 10000000.0
+2024-12-06 13:38:48,527 - dash_client.py:274 - INFO - Basic-DASH: Selected 10000000.0 for the segment 3
+current bitrate: 10000000.0
+segment_path: init-stream0.m4s
+segment_url: https://10.0.0.20:4242/init-stream0.m4s
+2024-12-06 13:38:48,527 - dash_buffer.py:310 - INFO - BufferStats: EpochTime=0.006582498550415039,CurrentPlaybackTime=0.0,CurrentBufferSize=0,CurrentPlaybackState=PLAY,Action=StillPlaying,Bitrate=10000000
+2024-12-06 13:38:48,528 - dash_client.py:333 - INFO - BASIC: Segment URL = https://10.0.0.20:4242/init-stream0.m4s
+debug 1 0
+2024-12-06 13:38:48,528 - dash_buffer.py:206 - INFO - Started playing with representation 10000000 at 3.814697265625e-06
+2024-12-06 13:38:48,540 - dash_client.py:355 - INFO - BASIC: Downloaded segment https://10.0.0.20:4242/init-stream0.m4s
+2024-12-06 13:38:48,545 - dash_client.py:375 - INFO - BASIC : The total downloaded = 6250000.0, segment_size = 6250000.0, segment_number = 2
+2024-12-06 13:38:48,550 - dash_buffer.py:259 - INFO - Writing segment 2 with bitrate 10000000.0 to buffer.
+2024-12-06 13:38:48,556 - dash_buffer.py:267 - INFO - Buffer updated. Current size: 1, Total length: 10.0.
+2024-12-06 13:38:48,587 - dash_buffer.py:310 - INFO - BufferStats: EpochTime=0.04058694839477539,CurrentPlaybackTime=0.03853917121887207,CurrentBufferSize=1,CurrentPlaybackState=PLAY,Action=Writing,Bitrate=10000000.0
+2024-12-06 13:38:48,592 - dash_client.py:390 - INFO - Downloaded https://10.0.0.20:4242/init-stream0.m4s. Size = 6250000.0 in 0.011832710999442497 seconds
+2024-12-06 13:38:48,598 - dash_client.py:246 - INFO -  BASIC: Processing the segment 3
+segment_number =3
+dp_object.video[bitrate].start=1
+2024-12-06 13:38:48,603 - basic_dash3.py:62 - INFO - Basic Adaptation: Download Rate = 874599105.6475819, next_bitrate = 10000000.0
+2024-12-06 13:38:48,609 - dash_client.py:274 - INFO - Basic-DASH: Selected 10000000.0 for the segment 4
+current bitrate: 10000000.0
+segment_path: chunk-stream0-00001.m4s
+segment_url: https://10.0.0.20:4242/chunk-stream0-00001.m4s
+2024-12-06 13:38:48,614 - dash_client.py:333 - INFO - BASIC: Segment URL = https://10.0.0.20:4242/chunk-stream0-00001.m4s
+debug 1 1
+2024-12-06 13:38:48,796 - dash_client.py:355 - INFO - BASIC: Downloaded segment https://10.0.0.20:4242/chunk-stream0-00001.m4s
+2024-12-06 13:38:48,801 - dash_client.py:375 - INFO - BASIC : The total downloaded = 12500000.0, segment_size = 6250000.0, segment_number = 3
+2024-12-06 13:38:48,807 - dash_buffer.py:259 - INFO - Writing segment 3 with bitrate 10000000.0 to buffer.
+2024-12-06 13:38:48,812 - dash_buffer.py:267 - INFO - Buffer updated. Current size: 2, Total length: 15.0.
+2024-12-06 13:38:48,853 - dash_buffer.py:310 - INFO - BufferStats: EpochTime=0.29668736457824707,CurrentPlaybackTime=0.29456162452697754,CurrentBufferSize=2,CurrentPlaybackState=PLAY,Action=Writing,Bitrate=10000000.0
+2024-12-06 13:38:48,859 - dash_client.py:390 - INFO - Downloaded https://10.0.0.20:4242/chunk-stream0-00001.m4s. Size = 6250000.0 in 0.17657623899958708 seconds
+2024-12-06 13:38:48,864 - dash_client.py:246 - INFO -  BASIC: Processing the segment 4
+segment_number =4
+dp_object.video[bitrate].start=1
+2024-12-06 13:38:48,869 - basic_dash3.py:62 - INFO - Basic Adaptation: Download Rate = 427816108.84371567, next_bitrate = 10000000.0
+2024-12-06 13:38:48,874 - dash_client.py:274 - INFO - Basic-DASH: Selected 10000000.0 for the segment 5
+current bitrate: 10000000.0
+segment_path: chunk-stream0-00002.m4s
+segment_url: https://10.0.0.20:4242/chunk-stream0-00002.m4s
+2024-12-06 13:38:48,880 - dash_client.py:333 - INFO - BASIC: Segment URL = https://10.0.0.20:4242/chunk-stream0-00002.m4s
+debug 1 12
+2024-12-06 13:38:49,071 - dash_client.py:355 - INFO - BASIC: Downloaded segment https://10.0.0.20:4242/chunk-stream0-00002.m4s
+2024-12-06 13:38:49,071 - dash_client.py:375 - INFO - BASIC : The total downloaded = 18750000.0, segment_size = 6250000.0, segment_number = 4
+2024-12-06 13:38:49,076 - dash_buffer.py:259 - INFO - Writing segment 4 with bitrate 10000000.0 to buffer.
+2024-12-06 13:38:49,081 - dash_buffer.py:267 - INFO - Buffer updated. Current size: 3, Total length: 20.0.
+2024-12-06 13:38:49,118 - dash_buffer.py:310 - INFO - BufferStats: EpochTime=0.5660216808319092,CurrentPlaybackTime=0.5639312267303467,CurrentBufferSize=3,CurrentPlaybackState=PLAY,Action=Writing,Bitrate=10000000.0
+2024-12-06 13:38:49,123 - dash_client.py:390 - INFO - Downloaded https://10.0.0.20:4242/chunk-stream0-00002.m4s. Size = 6250000.0 in 0.1857085769997866 seconds
+2024-12-06 13:38:49,128 - dash_client.py:246 - INFO -  BASIC: Processing the segment 5
+segment_number =5
+dp_object.video[bitrate].start=1
+2024-12-06 13:38:49,134 - basic_dash3.py:62 - INFO - Basic Adaptation: Download Rate = 357607861.45792526, next_bitrate = 10000000.0
+2024-12-06 13:38:49,139 - dash_client.py:274 - INFO - Basic-DASH: Selected 10000000.0 for the segment 6
+current bitrate: 10000000.0
+segment_path: chunk-stream0-00003.m4s
+segment_url: https://10.0.0.20:4242/chunk-stream0-00003.m4s
+2024-12-06 13:38:49,145 - dash_client.py:333 - INFO - BASIC: Segment URL = https://10.0.0.20:4242/chunk-stream0-00003.m4s
+2024-12-06 13:38:49,150 - dash_client.py:336 - INFO - SLEEPING for 5.0seconds 
+2024-12-06 13:38:53,528 - dash_buffer.py:193 - INFO - Reading the segment number 2 with length 5.0 from the buffer at playtime 5.000057935714722
+2024-12-06 13:38:53,528 - dash_buffer.py:310 - INFO - BufferStats: EpochTime=5.00747537612915,CurrentPlaybackTime=5.000255107879639,CurrentBufferSize=2,CurrentPlaybackState=PLAY,Action=StillPlaying,Bitrate=10000000.0
+2024-12-06 13:38:54,213 - dash_client.py:340 - INFO - SLEPT for 5.063402414321899seconds 
+debug 1 12
+2024-12-06 13:38:54,404 - dash_client.py:355 - INFO - BASIC: Downloaded segment https://10.0.0.20:4242/chunk-stream0-00003.m4s
+2024-12-06 13:38:54,409 - dash_client.py:375 - INFO - BASIC : The total downloaded = 25000000.0, segment_size = 6250000.0, segment_number = 5
+2024-12-06 13:38:54,415 - dash_buffer.py:259 - INFO - Writing segment 5 with bitrate 10000000.0 to buffer.
+2024-12-06 13:38:54,420 - dash_buffer.py:267 - INFO - Buffer updated. Current size: 3, Total length: 20.0.
+2024-12-06 13:38:54,446 - dash_buffer.py:310 - INFO - BufferStats: EpochTime=5.90451455116272,CurrentPlaybackTime=5.897305488586426,CurrentBufferSize=3,CurrentPlaybackState=PLAY,Action=Writing,Bitrate=10000000.0
+2024-12-06 13:38:54,451 - dash_client.py:390 - INFO - Downloaded https://10.0.0.20:4242/chunk-stream0-00003.m4s. Size = 6250000.0 in 0.18530918699980248 seconds
+2024-12-06 13:38:54,456 - dash_client.py:246 - INFO -  BASIC: Processing the segment 6
+segment_number =6
+dp_object.video[bitrate].start=1
+2024-12-06 13:38:54,462 - basic_dash3.py:62 - INFO - Basic Adaptation: Download Rate = 330708033.5156411, next_bitrate = 10000000.0
+2024-12-06 13:38:54,467 - dash_client.py:274 - INFO - Basic-DASH: Selected 10000000.0 for the segment 7
+current bitrate: 10000000.0
+segment_path: chunk-stream0-00004.m4s
+segment_url: https://10.0.0.20:4242/chunk-stream0-00004.m4s
+2024-12-06 13:38:54,473 - dash_client.py:333 - INFO - BASIC: Segment URL = https://10.0.0.20:4242/chunk-stream0-00004.m4s
+2024-12-06 13:38:54,478 - dash_client.py:336 - INFO - SLEEPING for 5.0seconds 
+2024-12-06 13:38:58,528 - dash_buffer.py:193 - INFO - Reading the segment number 3 with length 5.0 from the buffer at playtime 10.000449180603027
+2024-12-06 13:38:58,528 - dash_buffer.py:310 - INFO - BufferStats: EpochTime=10.007827281951904,CurrentPlaybackTime=10.000606536865234,CurrentBufferSize=2,CurrentPlaybackState=PLAY,Action=StillPlaying,Bitrate=10000000.0
+2024-12-06 13:38:59,541 - dash_client.py:340 - INFO - SLEPT for 5.062936305999756seconds 
+debug 1 12
+2024-12-06 13:38:59,704 - dash_client.py:355 - INFO - BASIC: Downloaded segment https://10.0.0.20:4242/chunk-stream0-00004.m4s
+2024-12-06 13:38:59,709 - dash_client.py:375 - INFO - BASIC : The total downloaded = 31250000.0, segment_size = 6250000.0, segment_number = 6
+2024-12-06 13:38:59,715 - dash_buffer.py:259 - INFO - Writing segment 6 with bitrate 10000000.0 to buffer.
+2024-12-06 13:38:59,720 - dash_buffer.py:267 - INFO - Buffer updated. Current size: 3, Total length: 20.0.
+2024-12-06 13:38:59,740 - dash_buffer.py:310 - INFO - BufferStats: EpochTime=11.199511051177979,CurrentPlaybackTime=11.192294836044312,CurrentBufferSize=3,CurrentPlaybackState=PLAY,Action=Writing,Bitrate=10000000.0
+2024-12-06 13:38:59,746 - dash_client.py:390 - INFO - Downloaded https://10.0.0.20:4242/chunk-stream0-00004.m4s. Size = 6250000.0 in 0.15781490599965764 seconds
+2024-12-06 13:38:59,751 - dash_client.py:246 - INFO -  BASIC: Processing the segment 7
+segment_number =7
+dp_object.video[bitrate].start=1
+2024-12-06 13:38:59,756 - basic_dash3.py:62 - INFO - Basic Adaptation: Download Rate = 327835334.14536166, next_bitrate = 10000000.0
+2024-12-06 13:38:59,762 - dash_client.py:274 - INFO - Basic-DASH: Selected 10000000.0 for the segment 8
+current bitrate: 10000000.0
+segment_path: chunk-stream0-00005.m4s
+segment_url: https://10.0.0.20:4242/chunk-stream0-00005.m4s
+2024-12-06 13:38:59,767 - dash_client.py:333 - INFO - BASIC: Segment URL = https://10.0.0.20:4242/chunk-stream0-00005.m4s
+2024-12-06 13:38:59,773 - dash_client.py:336 - INFO - SLEEPING for 5.0seconds 
+2024-12-06 13:39:03,528 - dash_buffer.py:193 - INFO - Reading the segment number 4 with length 5.0 from the buffer at playtime 15.000792264938354
+2024-12-06 13:39:03,529 - dash_buffer.py:310 - INFO - BufferStats: EpochTime=15.008180618286133,CurrentPlaybackTime=15.000960350036621,CurrentBufferSize=2,CurrentPlaybackState=PLAY,Action=StillPlaying,Bitrate=10000000.0
+2024-12-06 13:39:04,836 - dash_client.py:340 - INFO - SLEPT for 5.063387393951416seconds 
+debug 1 2
+2024-12-06 13:39:05,033 - dash_client.py:355 - INFO - BASIC: Downloaded segment https://10.0.0.20:4242/chunk-stream0-00005.m4s
+2024-12-06 13:39:05,039 - dash_client.py:375 - INFO - BASIC : The total downloaded = 37500000.0, segment_size = 6250000.0, segment_number = 7
+2024-12-06 13:39:05,044 - dash_buffer.py:259 - INFO - Writing segment 7 with bitrate 10000000.0 to buffer.
+2024-12-06 13:39:05,049 - dash_buffer.py:267 - INFO - Buffer updated. Current size: 3, Total length: 20.0.
+2024-12-06 13:39:05,070 - dash_buffer.py:310 - INFO - BufferStats: EpochTime=16.534097909927368,CurrentPlaybackTime=16.526889324188232,CurrentBufferSize=3,CurrentPlaybackState=PLAY,Action=Writing,Bitrate=10000000.0
+2024-12-06 13:39:05,075 - dash_client.py:390 - INFO - Downloaded https://10.0.0.20:4242/chunk-stream0-00005.m4s. Size = 6250000.0 in 0.1912939309995636 seconds
+2024-12-06 13:39:05,081 - dash_client.py:246 - INFO -  BASIC: Processing the segment 8
+segment_number =8
+dp_object.video[bitrate].start=1
+2024-12-06 13:39:05,086 - basic_dash3.py:62 - INFO - Basic Adaptation: Download Rate = 314507643.1603028, next_bitrate = 10000000.0
+2024-12-06 13:39:05,091 - dash_client.py:274 - INFO - Basic-DASH: Selected 10000000.0 for the segment 9
+current bitrate: 10000000.0
+segment_path: chunk-stream0-00006.m4s
+segment_url: https://10.0.0.20:4242/chunk-stream0-00006.m4s
+2024-12-06 13:39:05,096 - dash_client.py:333 - INFO - BASIC: Segment URL = https://10.0.0.20:4242/chunk-stream0-00006.m4s
+2024-12-06 13:39:05,101 - dash_client.py:336 - INFO - SLEEPING for 5.0seconds 
+2024-12-06 13:39:08,530 - dash_buffer.py:193 - INFO - Reading the segment number 5 with length 5.0 from the buffer at playtime 20.001951932907104
+2024-12-06 13:39:08,530 - dash_buffer.py:310 - INFO - BufferStats: EpochTime=20.009360790252686,CurrentPlaybackTime=20.002140283584595,CurrentBufferSize=2,CurrentPlaybackState=PLAY,Action=StillPlaying,Bitrate=10000000.0
+2024-12-06 13:39:10,161 - dash_client.py:340 - INFO - SLEPT for 5.059365510940552seconds 
+debug 1 12
+2024-12-06 13:39:10,342 - dash_client.py:355 - INFO - BASIC: Downloaded segment https://10.0.0.20:4242/chunk-stream0-00006.m4s
+2024-12-06 13:39:10,347 - dash_client.py:375 - INFO - BASIC : The total downloaded = 43750000.0, segment_size = 6250000.0, segment_number = 8
+2024-12-06 13:39:10,353 - dash_buffer.py:259 - INFO - Writing segment 8 with bitrate 10000000.0 to buffer.
+2024-12-06 13:39:10,358 - dash_buffer.py:267 - INFO - Buffer updated. Current size: 3, Total length: 20.0.
+2024-12-06 13:39:10,363 - dash_buffer.py:310 - INFO - BufferStats: EpochTime=21.837494134902954,CurrentPlaybackTime=21.830276489257812,CurrentBufferSize=3,CurrentPlaybackState=PLAY,Action=Writing,Bitrate=10000000.0
+2024-12-06 13:39:10,368 - dash_client.py:390 - INFO - Downloaded https://10.0.0.20:4242/chunk-stream0-00006.m4s. Size = 6250000.0 in 0.17580064899993886 seconds
+2024-12-06 13:39:10,374 - dash_client.py:246 - INFO -  BASIC: Processing the segment 9
+segment_number =9
+dp_object.video[bitrate].start=1
+2024-12-06 13:39:10,379 - basic_dash3.py:62 - INFO - Basic Adaptation: Download Rate = 309824296.7918787, next_bitrate = 10000000.0
+2024-12-06 13:39:10,384 - dash_client.py:274 - INFO - Basic-DASH: Selected 10000000.0 for the segment 10
+current bitrate: 10000000.0
+segment_path: chunk-stream0-00007.m4s
+segment_url: https://10.0.0.20:4242/chunk-stream0-00007.m4s
+2024-12-06 13:39:10,390 - dash_client.py:333 - INFO - BASIC: Segment URL = https://10.0.0.20:4242/chunk-stream0-00007.m4s
+2024-12-06 13:39:10,395 - dash_client.py:336 - INFO - SLEEPING for 5.0seconds 
+2024-12-06 13:39:13,530 - dash_buffer.py:193 - INFO - Reading the segment number 6 with length 5.0 from the buffer at playtime 25.002339601516724
+2024-12-06 13:39:13,530 - dash_buffer.py:310 - INFO - BufferStats: EpochTime=25.009711027145386,CurrentPlaybackTime=25.00248908996582,CurrentBufferSize=2,CurrentPlaybackState=PLAY,Action=StillPlaying,Bitrate=10000000.0
+2024-12-06 13:39:15,455 - dash_client.py:340 - INFO - SLEPT for 5.060124635696411seconds 
+debug 1 2
+2024-12-06 13:39:15,659 - dash_client.py:355 - INFO - BASIC: Downloaded segment https://10.0.0.20:4242/chunk-stream0-00007.m4s
+2024-12-06 13:39:15,664 - dash_client.py:375 - INFO - BASIC : The total downloaded = 50000000.0, segment_size = 6250000.0, segment_number = 9
+2024-12-06 13:39:15,669 - dash_buffer.py:259 - INFO - Writing segment 9 with bitrate 10000000.0 to buffer.
+2024-12-06 13:39:15,675 - dash_buffer.py:267 - INFO - Buffer updated. Current size: 3, Total length: 20.0.
+2024-12-06 13:39:15,711 - dash_buffer.py:310 - INFO - BufferStats: EpochTime=27.159340620040894,CurrentPlaybackTime=27.157230615615845,CurrentBufferSize=3,CurrentPlaybackState=PLAY,Action=Writing,Bitrate=10000000.0
+2024-12-06 13:39:15,716 - dash_client.py:390 - INFO - Downloaded https://10.0.0.20:4242/chunk-stream0-00007.m4s. Size = 6250000.0 in 0.19826764200024627 seconds
+2024-12-06 13:39:15,721 - dash_client.py:246 - INFO -  BASIC: Processing the segment 10
+segment_number =10
+dp_object.video[bitrate].start=1
+2024-12-06 13:39:15,726 - basic_dash3.py:62 - INFO - Basic Adaptation: Download Rate = 301218387.4874975, next_bitrate = 10000000.0
+2024-12-06 13:39:15,732 - dash_client.py:274 - INFO - Basic-DASH: Selected 10000000.0 for the segment 11
+current bitrate: 10000000.0
+segment_path: chunk-stream0-00008.m4s
+segment_url: https://10.0.0.20:4242/chunk-stream0-00008.m4s
+2024-12-06 13:39:15,737 - dash_client.py:333 - INFO - BASIC: Segment URL = https://10.0.0.20:4242/chunk-stream0-00008.m4s
+2024-12-06 13:39:15,742 - dash_client.py:336 - INFO - SLEEPING for 5.0seconds 
+2024-12-06 13:39:18,530 - dash_buffer.py:193 - INFO - Reading the segment number 7 with length 5.0 from the buffer at playtime 30.002706050872803
+2024-12-06 13:39:18,531 - dash_buffer.py:310 - INFO - BufferStats: EpochTime=30.010123252868652,CurrentPlaybackTime=30.002901792526245,CurrentBufferSize=2,CurrentPlaybackState=PLAY,Action=StillPlaying,Bitrate=10000000.0
+2024-12-06 13:39:20,802 - dash_client.py:340 - INFO - SLEPT for 5.059458255767822seconds 
+debug 1 2
+2024-12-06 13:39:20,988 - dash_client.py:355 - INFO - BASIC: Downloaded segment https://10.0.0.20:4242/chunk-stream0-00008.m4s
+2024-12-06 13:39:20,993 - dash_client.py:375 - INFO - BASIC : The total downloaded = 56250000.0, segment_size = 6250000.0, segment_number = 10
+2024-12-06 13:39:20,998 - dash_buffer.py:259 - INFO - Writing segment 10 with bitrate 10000000.0 to buffer.
+2024-12-06 13:39:21,003 - dash_buffer.py:267 - INFO - Buffer updated. Current size: 3, Total length: 20.0.
+2024-12-06 13:39:21,029 - dash_buffer.py:310 - INFO - BufferStats: EpochTime=32.48809266090393,CurrentPlaybackTime=32.48605155944824,CurrentBufferSize=3,CurrentPlaybackState=PLAY,Action=Writing,Bitrate=10000000.0
+2024-12-06 13:39:21,035 - dash_client.py:390 - INFO - Downloaded https://10.0.0.20:4242/chunk-stream0-00008.m4s. Size = 6250000.0 in 0.18091361699953268 seconds
+2024-12-06 13:39:21,040 - dash_client.py:246 - INFO -  BASIC: Processing the segment 11
+segment_number =11
+dp_object.video[bitrate].start=1
+2024-12-06 13:39:21,040 - basic_dash3.py:62 - INFO - Basic Adaptation: Download Rate = 298239631.0346884, next_bitrate = 10000000.0
+2024-12-06 13:39:21,040 - dash_client.py:274 - INFO - Basic-DASH: Selected 10000000.0 for the segment 12
+current bitrate: 10000000.0
+segment_path: chunk-stream0-00009.m4s
+segment_url: https://10.0.0.20:4242/chunk-stream0-00009.m4s
+2024-12-06 13:39:21,040 - dash_client.py:333 - INFO - BASIC: Segment URL = https://10.0.0.20:4242/chunk-stream0-00009.m4s
+2024-12-06 13:39:21,045 - dash_client.py:336 - INFO - SLEEPING for 5.0seconds 
+2024-12-06 13:39:23,531 - dash_buffer.py:193 - INFO - Reading the segment number 8 with length 5.0 from the buffer at playtime 35.003105878829956
+2024-12-06 13:39:23,531 - dash_buffer.py:310 - INFO - BufferStats: EpochTime=35.01054620742798,CurrentPlaybackTime=35.00333213806152,CurrentBufferSize=2,CurrentPlaybackState=PLAY,Action=StillPlaying,Bitrate=10000000.0
+2024-12-06 13:39:26,105 - dash_client.py:340 - INFO - SLEPT for 5.059375286102295seconds 
+debug 1 2
+2024-12-06 13:39:26,281 - dash_client.py:355 - INFO - BASIC: Downloaded segment https://10.0.0.20:4242/chunk-stream0-00009.m4s
+2024-12-06 13:39:26,286 - dash_client.py:375 - INFO - BASIC : The total downloaded = 62500000.0, segment_size = 6250000.0, segment_number = 11
+2024-12-06 13:39:26,292 - dash_buffer.py:259 - INFO - Writing segment 11 with bitrate 10000000.0 to buffer.
+2024-12-06 13:39:26,292 - dash_buffer.py:267 - INFO - Buffer updated. Current size: 3, Total length: 20.0.
+2024-12-06 13:39:26,323 - dash_buffer.py:310 - INFO - BufferStats: EpochTime=37.77188992500305,CurrentPlaybackTime=37.76979088783264,CurrentBufferSize=3,CurrentPlaybackState=PLAY,Action=Writing,Bitrate=10000000.0
+2024-12-06 13:39:26,329 - dash_client.py:390 - INFO - Downloaded https://10.0.0.20:4242/chunk-stream0-00009.m4s. Size = 6250000.0 in 0.17601732799994352 seconds
+2024-12-06 13:39:26,334 - dash_client.py:246 - INFO -  BASIC: Processing the segment 12
+segment_number =12
+dp_object.video[bitrate].start=1
+2024-12-06 13:39:26,339 - basic_dash3.py:62 - INFO - Basic Adaptation: Download Rate = 296758602.058696, next_bitrate = 10000000.0
+2024-12-06 13:39:26,344 - dash_client.py:274 - INFO - Basic-DASH: Selected 10000000.0 for the segment 13
+current bitrate: 10000000.0
+segment_path: chunk-stream0-00010.m4s
+segment_url: https://10.0.0.20:4242/chunk-stream0-00010.m4s
+2024-12-06 13:39:26,349 - dash_client.py:333 - INFO - BASIC: Segment URL = https://10.0.0.20:4242/chunk-stream0-00010.m4s
+2024-12-06 13:39:26,355 - dash_client.py:336 - INFO - SLEEPING for 5.0seconds 
+2024-12-06 13:39:28,531 - dash_buffer.py:193 - INFO - Reading the segment number 9 with length 5.0 from the buffer at playtime 40.00356411933899
+2024-12-06 13:39:28,532 - dash_buffer.py:310 - INFO - BufferStats: EpochTime=40.01094055175781,CurrentPlaybackTime=40.003724575042725,CurrentBufferSize=2,CurrentPlaybackState=PLAY,Action=StillPlaying,Bitrate=10000000.0
+2024-12-06 13:39:31,415 - dash_client.py:340 - INFO - SLEPT for 5.060155868530273seconds 
+debug 1 2
+2024-12-06 13:39:31,610 - dash_client.py:355 - INFO - BASIC: Downloaded segment https://10.0.0.20:4242/chunk-stream0-00010.m4s
+2024-12-06 13:39:31,615 - dash_client.py:375 - INFO - BASIC : The total downloaded = 68750000.0, segment_size = 6250000.0, segment_number = 12
+2024-12-06 13:39:31,620 - dash_buffer.py:259 - INFO - Writing segment 12 with bitrate 10000000.0 to buffer.
+2024-12-06 13:39:31,625 - dash_buffer.py:267 - INFO - Buffer updated. Current size: 3, Total length: 20.0.
+2024-12-06 13:39:31,651 - dash_buffer.py:310 - INFO - BufferStats: EpochTime=43.11003088951111,CurrentPlaybackTime=43.107908725738525,CurrentBufferSize=3,CurrentPlaybackState=PLAY,Action=Writing,Bitrate=10000000.0
+2024-12-06 13:39:31,657 - dash_client.py:390 - INFO - Downloaded https://10.0.0.20:4242/chunk-stream0-00010.m4s. Size = 6250000.0 in 0.18927967800027545 seconds
+2024-12-06 13:39:31,662 - dash_client.py:246 - INFO -  BASIC: Processing the segment 13
+segment_number =13
+dp_object.video[bitrate].start=1
+2024-12-06 13:39:31,667 - basic_dash3.py:62 - INFO - Basic Adaptation: Download Rate = 293466245.5267026, next_bitrate = 10000000.0
+2024-12-06 13:39:31,672 - dash_client.py:274 - INFO - Basic-DASH: Selected 10000000.0 for the segment 14
+current bitrate: 10000000.0
+segment_path: chunk-stream0-00011.m4s
+segment_url: https://10.0.0.20:4242/chunk-stream0-00011.m4s
+2024-12-06 13:39:31,678 - dash_client.py:333 - INFO - BASIC: Segment URL = https://10.0.0.20:4242/chunk-stream0-00011.m4s
+2024-12-06 13:39:31,683 - dash_client.py:336 - INFO - SLEEPING for 5.0seconds 
+2024-12-06 13:39:33,532 - dash_buffer.py:193 - INFO - Reading the segment number 10 with length 5.0 from the buffer at playtime 45.00392508506775
+2024-12-06 13:39:33,532 - dash_buffer.py:310 - INFO - BufferStats: EpochTime=45.0112886428833,CurrentPlaybackTime=45.00406885147095,CurrentBufferSize=2,CurrentPlaybackState=PLAY,Action=StillPlaying,Bitrate=10000000.0
+2024-12-06 13:39:36,742 - dash_client.py:340 - INFO - SLEPT for 5.059442758560181seconds 
+debug 1 2
+2024-12-06 13:39:36,914 - dash_client.py:355 - INFO - BASIC: Downloaded segment https://10.0.0.20:4242/chunk-stream0-00011.m4s
+2024-12-06 13:39:36,920 - dash_client.py:375 - INFO - BASIC : The total downloaded = 75000000.0, segment_size = 6250000.0, segment_number = 13
+2024-12-06 13:39:36,925 - dash_buffer.py:259 - INFO - Writing segment 13 with bitrate 10000000.0 to buffer.
+2024-12-06 13:39:36,930 - dash_buffer.py:267 - INFO - Buffer updated. Current size: 3, Total length: 20.0.
+2024-12-06 13:39:36,956 - dash_buffer.py:310 - INFO - BufferStats: EpochTime=48.414748668670654,CurrentPlaybackTime=48.412614822387695,CurrentBufferSize=3,CurrentPlaybackState=PLAY,Action=Writing,Bitrate=10000000.0
+2024-12-06 13:39:36,961 - dash_client.py:390 - INFO - Downloaded https://10.0.0.20:4242/chunk-stream0-00011.m4s. Size = 6250000.0 in 0.1665595980002763 seconds
+2024-12-06 13:39:36,966 - dash_client.py:246 - INFO -  BASIC: Processing the segment 14
+segment_number =14
+dp_object.video[bitrate].start=1
+2024-12-06 13:39:36,972 - basic_dash3.py:62 - INFO - Basic Adaptation: Download Rate = 294015260.2802537, next_bitrate = 10000000.0
+2024-12-06 13:39:36,977 - dash_client.py:274 - INFO - Basic-DASH: Selected 10000000.0 for the segment 15
+current bitrate: 10000000.0
+segment_path: chunk-stream0-00012.m4s
+segment_url: https://10.0.0.20:4242/chunk-stream0-00012.m4s
+2024-12-06 13:39:36,982 - dash_client.py:333 - INFO - BASIC: Segment URL = https://10.0.0.20:4242/chunk-stream0-00012.m4s
+2024-12-06 13:39:36,982 - dash_client.py:336 - INFO - SLEEPING for 5.0seconds 
+2024-12-06 13:39:38,532 - dash_buffer.py:193 - INFO - Reading the segment number 11 with length 5.0 from the buffer at playtime 50.0042839050293
+2024-12-06 13:39:38,532 - dash_buffer.py:310 - INFO - BufferStats: EpochTime=50.011730670928955,CurrentPlaybackTime=50.004509925842285,CurrentBufferSize=2,CurrentPlaybackState=PLAY,Action=StillPlaying,Bitrate=10000000.0
+2024-12-06 13:39:42,046 - dash_client.py:340 - INFO - SLEPT for 5.06407356262207seconds 
+debug 1 12
+2024-12-06 13:39:42,234 - dash_client.py:355 - INFO - BASIC: Downloaded segment https://10.0.0.20:4242/chunk-stream0-00012.m4s
+2024-12-06 13:39:42,239 - dash_client.py:375 - INFO - BASIC : The total downloaded = 81250000.0, segment_size = 6250000.0, segment_number = 14
+2024-12-06 13:39:42,245 - dash_buffer.py:259 - INFO - Writing segment 14 with bitrate 10000000.0 to buffer.
+2024-12-06 13:39:42,250 - dash_buffer.py:267 - INFO - Buffer updated. Current size: 3, Total length: 20.0.
+2024-12-06 13:39:42,286 - dash_buffer.py:310 - INFO - BufferStats: EpochTime=53.73449373245239,CurrentPlaybackTime=53.732433795928955,CurrentBufferSize=3,CurrentPlaybackState=PLAY,Action=Writing,Bitrate=10000000.0
+2024-12-06 13:39:42,291 - dash_client.py:390 - INFO - Downloaded https://10.0.0.20:4242/chunk-stream0-00012.m4s. Size = 6250000.0 in 0.1824301770002421 seconds
+2024-12-06 13:39:42,297 - dash_client.py:246 - INFO -  BASIC: Processing the segment 15
+segment_number =15
+dp_object.video[bitrate].start=1
+2024-12-06 13:39:42,302 - basic_dash3.py:62 - INFO - Basic Adaptation: Download Rate = 292379171.2231513, next_bitrate = 10000000.0
+2024-12-06 13:39:42,307 - dash_client.py:274 - INFO - Basic-DASH: Selected 10000000.0 for the segment 16
+current bitrate: 10000000.0
+segment_path: chunk-stream0-00013.m4s
+segment_url: https://10.0.0.20:4242/chunk-stream0-00013.m4s
+2024-12-06 13:39:42,312 - dash_client.py:333 - INFO - BASIC: Segment URL = https://10.0.0.20:4242/chunk-stream0-00013.m4s
+2024-12-06 13:39:42,318 - dash_client.py:336 - INFO - SLEEPING for 5.0seconds 
+2024-12-06 13:39:43,532 - dash_buffer.py:193 - INFO - Reading the segment number 12 with length 5.0 from the buffer at playtime 55.00472617149353
+2024-12-06 13:39:43,533 - dash_buffer.py:310 - INFO - BufferStats: EpochTime=55.01207232475281,CurrentPlaybackTime=55.004849910736084,CurrentBufferSize=2,CurrentPlaybackState=PLAY,Action=StillPlaying,Bitrate=10000000.0
+2024-12-06 13:39:47,377 - dash_client.py:340 - INFO - SLEPT for 5.059059143066406seconds 
+debug 1 12
+2024-12-06 13:39:47,534 - dash_client.py:355 - INFO - BASIC: Downloaded segment https://10.0.0.20:4242/chunk-stream0-00013.m4s
+2024-12-06 13:39:47,540 - dash_client.py:375 - INFO - BASIC : The total downloaded = 87500000.0, segment_size = 6250000.0, segment_number = 15
+2024-12-06 13:39:47,545 - dash_buffer.py:259 - INFO - Writing segment 15 with bitrate 10000000.0 to buffer.
+2024-12-06 13:39:47,550 - dash_buffer.py:267 - INFO - Buffer updated. Current size: 3, Total length: 20.0.
+2024-12-06 13:39:47,576 - dash_buffer.py:310 - INFO - BufferStats: EpochTime=59.03465270996094,CurrentPlaybackTime=59.02743911743164,CurrentBufferSize=3,CurrentPlaybackState=PLAY,Action=Writing,Bitrate=10000000.0
+2024-12-06 13:39:47,581 - dash_client.py:390 - INFO - Downloaded https://10.0.0.20:4242/chunk-stream0-00013.m4s. Size = 6250000.0 in 0.15204614200047217 seconds
+2024-12-06 13:39:47,586 - dash_client.py:246 - INFO -  BASIC: Processing the segment 16
+segment_number =16
+dp_object.video[bitrate].start=1
+2024-12-06 13:39:47,592 - basic_dash3.py:62 - INFO - Basic Adaptation: Download Rate = 294713671.90269935, next_bitrate = 10000000.0
+2024-12-06 13:39:47,597 - dash_client.py:274 - INFO - Basic-DASH: Selected 10000000.0 for the segment 17
+current bitrate: 10000000.0
+segment_path: chunk-stream0-00001.m4s
+segment_url: https://10.0.0.20:4242/chunk-stream0-00001.m4s
+2024-12-06 13:39:47,602 - dash_client.py:333 - INFO - BASIC: Segment URL = https://10.0.0.20:4242/chunk-stream0-00001.m4s
+2024-12-06 13:39:47,607 - dash_client.py:336 - INFO - SLEEPING for 5.0seconds 
+2024-12-06 13:39:48,533 - dash_buffer.py:193 - INFO - Reading the segment number 13 with length 5.0 from the buffer at playtime 60.00507879257202
+2024-12-06 13:39:48,533 - dash_buffer.py:310 - INFO - BufferStats: EpochTime=60.01242256164551,CurrentPlaybackTime=60.00521111488342,CurrentBufferSize=2,CurrentPlaybackState=PLAY,Action=StillPlaying,Bitrate=10000000.0
+2024-12-06 13:39:52,667 - dash_client.py:340 - INFO - SLEPT for 5.059631109237671seconds 
+debug 1 12
+2024-12-06 13:39:52,864 - dash_client.py:355 - INFO - BASIC: Downloaded segment https://10.0.0.20:4242/chunk-stream0-00001.m4s
+2024-12-06 13:39:52,870 - dash_client.py:375 - INFO - BASIC : The total downloaded = 93750000.0, segment_size = 6250000.0, segment_number = 16
+2024-12-06 13:39:52,875 - dash_buffer.py:259 - INFO - Writing segment 16 with bitrate 10000000.0 to buffer.
+2024-12-06 13:39:52,880 - dash_buffer.py:267 - INFO - Buffer updated. Current size: 3, Total length: 20.0.
+2024-12-06 13:39:52,916 - dash_buffer.py:310 - INFO - BufferStats: EpochTime=64.36487126350403,CurrentPlaybackTime=64.36282110214233,CurrentBufferSize=3,CurrentPlaybackState=PLAY,Action=Writing,Bitrate=10000000.0
+2024-12-06 13:39:52,922 - dash_client.py:390 - INFO - Downloaded https://10.0.0.20:4242/chunk-stream0-00001.m4s. Size = 6250000.0 in 0.19188845900043816 seconds
+2024-12-06 13:39:53,533 - dash_buffer.py:193 - INFO - Reading the segment number 14 with length 5.0 from the buffer at playtime 65.00545310974121
+2024-12-06 13:39:53,533 - dash_buffer.py:310 - INFO - BufferStats: EpochTime=65.01284146308899,CurrentPlaybackTime=65.0056369304657,CurrentBufferSize=2,CurrentPlaybackState=PLAY,Action=StillPlaying,Bitrate=10000000.0
+2024-12-06 13:39:58,328 - dash_buffer.py:211 - INFO - Completed the video playback: 69.8 seconds
+2024-12-06 13:39:58,328 - dash_buffer.py:62 - INFO - Changing state from PLAY to END at 69.80017852783203 Playback time 
+2024-12-06 13:39:58,328 - dash_buffer.py:310 - INFO - BufferStats: EpochTime=69.80749940872192,CurrentPlaybackTime=69.80017852783203,CurrentBufferSize=2,CurrentPlaybackState=END,Action=TheEnd,Bitrate=0
+no interruptions encountered

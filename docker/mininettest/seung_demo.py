@@ -2,17 +2,22 @@ import time
 import argparse
 from basicTopo import setup_environment
 
-SERVER_CMD = "cd /MAppLE/dash/ && ./caddy -quic -mp -scheduler rl -fec --fecConfig win-xor"
-CERTPATH = "--certpath /App/quic/quic_go_certs"
+SERVER_CMD = "cd /data/AggDeliv/mpquic-rl/MAppLE/dash/ && ./caddy -quic -mp -scheduler rl -fec --fecConfig win-xor"
+CERTPATH = "--certpath /data/AggDeliv/mpquic-rl/docker/quic/quic_go_certs"
 SCH = "-scheduler %s"
 ARGS = "-bind :6121 -www /var/www/"
-END = "> /logs/server.logs 2>&1"
+END = "> /data/AggDeliv/mpquic-rl/docker/logs/server.logs 2>&1"
 
 BASIC_DELAY = 10
 
-CLIENT_CMD = "cd /logs && python3 /MAppLE/astream/dash_client.py -q -mp -m https://10.0.0.20:4242/manifest.mpd -s rtt > /logs/client.logs 2>&1"
+# CLIENT_CMD = "openssl s_client -connect 10.0.0.20:4242 -servername 10.0.0.20 > /data/AggDeliv/mpquic-rl/docker/logs/client.logs 2>&1"
+# CLIENT_CMD = "python3 -m http.server --bind 10.0.0.20 --certfile /data/AggDeliv/mpquic-rl/MAppLE/dash/cert.pem --keyfile /data/AggDeliv/mpquic-rl/MAppLE/dash/privkey.pem 4242 && curl -k https://10.0.0.20:4242/ > /data/AggDeliv/mpquic-rl/docker/logs/client.logs 2>&1"
+CLIENT_CMD = "cd /data/AggDeliv/mpquic-rl/docker/logs && python3 /data/AggDeliv/mpquic-rl/MAppLE/astream/dash_client.py -q -mp -m https://10.0.0.20:4242/manifest.mpd -s rtt -p basic > /data/AggDeliv/mpquic-rl/docker/logs/client.logs 2>&1"
+# CLIENT_CMD = "cd /data/AggDeliv/mpquic-rl/docker/logs && python3 /data/AggDeliv/mpquic-rl/MAppLE/astream/dash_client.py -q -mp -m http://10.0.0.20:4040/manifest.mpd -s rtt > /data/AggDeliv/mpquic-rl/docker/logs/client.logs 2>&1"
 
-TCP_SERVER_CMD = "cd /var/www && python -m SimpleHTTPServer 80 &"
+# CLIENT_CMD = "cd /data/AggDeliv/mpquic-rl/MAppLE/astream/ && python dash_client.py -m http://10.0.0.20:4040/manifest.mpd -p basic > /data/AggDeliv/mpquic-rl/docker/logs/client.logs 2>&1"
+
+TCP_SERVER_CMD = "cd /data/AggDeliv/mpquic-rl/docker/var/www && python -m SimpleHTTPServer 80 &"
 TCP_CLIENT_CMD = "curl -s -o /dev/null 10.0.0.20/demo &"
 
 
@@ -42,22 +47,24 @@ def exec_test(server_cmd, rtt, tcp_traffic):
         client.cmd(TCP_CLIENT_CMD)
 
     start = time.time()
-    server_pcap = server.popen('tcpdump -w /MappLE-main/docker_logs/h1_dump.pcap')
+    server_pcap = server.popen('tcpdump -w /data/AggDeliv/mpquic-rl/MappLE/docker/logs/h1_dump.pcap')
     client.sendCmd(CLIENT_CMD)
     # Timeout of 20 seconds for detecting crashing tests
+    print("Wait for Client Output")
     output = client.monitor(timeoutms=20000)
-
     # Check for timeout
     if client.waiting:
+        print("Client Timeout")
         delta = 20
         client.sendInt()
         client.waiting = False
-	server_pcap.terminate()
-
+        server_pcap.terminate()
+ 
         network.stop()
         time.sleep(1)
         network.cleanup()
     else:
+        print("Client end")
         # TODO: Check for errors here?? How??
         delta = time.time() - start
 

@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package mpquic;
+
+// Define the PathInfo message
+message PathInfo {
+    string path_id = 1;
+    bool active = 2;
+    double RTT = 3;
+    double historical_throughput = 4;
+    double packet_loss = 5;
+    double bandwidth = 6;
+    double cwnd = 7;
+    double jitter = 8;
+}
+
+// Define the AggDelivState message
+message AggDelivState {
+    string resolution_type = 1;
+    repeated PathInfo paths_info = 2;
+    int32 bitrate = 3;
+}
+
+// Define the service
+service MPQUICService {
+    rpc SelectPath (AggDelivState) returns (PathInfo);
+}

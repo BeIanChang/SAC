@@ -88,7 +88,8 @@ func SetupRL() {
 	agent = newagent
 	require.NoError(err)
 	go SetupThreadRL()
-	goldlog.Infof("쓰레드 실행 명령")
+	// goldlog.Infof("쓰레드 실행 명령")
+	goldlog.Infof("Thread execution command")
 }
 
 func (sch *scheduler) receivedACKForRL(paths map[protocol.PathID]*path, ackFrame *wire.AckFrame) {
@@ -189,7 +190,8 @@ func (sch *scheduler) storeStateAction(s sessionI, pathID protocol.PathID, packe
 	event := RLNewEvent(pathID, packetNumber, state)
 	sch.rlmemories[pathID].PushBack(event)
 
-	goldlog.Infof("전송 [%d] %d", pathID, packetNumber)
+	// goldlog.Infof("전송 [%d] %d", pathID, packetNumber)
+	goldlog.Infof("forwarding [%d] %d", pathID, packetNumber)
 }
 
 func (sch *scheduler) selectPathReinforcementLearning(s sessionI, hasRetransmission bool, hasStreamRetransmission bool, fromPth *path) *path {
@@ -333,7 +335,8 @@ pathLoop:
 			// Store event to replay buffer
 			event := deepq.NewEvent(state, outcome.Action, outcome)
 			agent.Remember(event)
-			goldlog.Infof("기존 액션 %d 결과 %f 스테이트 %d -> %d", last_action, outcome.Reward, outcome.Observation, state)
+			// goldlog.Infof("기존 액션 %d 결과 %f 스테이트 %d -> %d", last_action, outcome.Reward, outcome.Observation, state)
+			goldlog.Infof("existing action %d result %f state %d -> %d", last_action, outcome.Reward, outcome.Observation, state)
 		}
 		last_action = action
 		last_state = state

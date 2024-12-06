@@ -142,7 +142,7 @@ def read_mpd(mpd_file, dashplayback, bitratefilter = None):
                 child_period = root[i]
                 break
         FORMAT = 1
-    #print child_period
+    print(f"child_period: {child_period}")
     video_segment_duration = None
 
     if bitratefilter is not None and int(bitratefilter) < 0:
@@ -199,7 +199,6 @@ def read_mpd(mpd_file, dashplayback, bitratefilter = None):
                                     config_dash.LOG.debug("Segment Playback Duration = {}".format(video_segment_duration))
     elif FORMAT == 1: #differentFormat
         print("mpd format 1")
-
         for adaptation_set in child_period:
             config_dash.JSON_HANDLE["video_metadata"]['available_bitrates'] = list()
             for representation in adaptation_set:
@@ -233,7 +232,7 @@ def read_mpd(mpd_file, dashplayback, bitratefilter = None):
                     if "SegmentBase" in get_tag_name(segment_info.tag):
                         for init in segment_info:
                             media_object[bandwidth].initialization = cut_url + init.attrib['sourceURL']
-
+                            
                     if 'video' in representation.attrib['mimeType']:
                         if "SegmentList" in get_tag_name(segment_info.tag):
                             config_dash.LOG.debug("Segment Playback Duration = {}".format(video_segment_duration))
@@ -241,7 +240,6 @@ def read_mpd(mpd_file, dashplayback, bitratefilter = None):
                             video_segment_duration = float(segment_info.attrib["duration"])
                             if "timescale" in segment_info.attrib:
                                 video_segment_duration /= float(segment_info.attrib["timescale"])
-
                             segment_size = int(representation.attrib["bandwidth"]) * video_segment_duration
 
                             for segment in segment_info:
@@ -262,16 +260,42 @@ def read_mpd(mpd_file, dashplayback, bitratefilter = None):
                                         else:
                                             # Default segment playback time is 1 second
                                             video_segment_duration = '1'
-
                                     #print segurl
                                     segurl = cut_url + segment.attrib['media']
                                     URL_LIST[bandwidth].append(segurl)
                                     media_object[bandwidth].segment_sizes.append(segment_size)
-
-
+                                    
+                        if "SegmentTemplate" in get_tag_name(segment_info.tag):
+                            media_object[bandwidth].base_url = segment_info.attrib["media"].replace("$RepresentationID$", representationId)
+                            media_object[bandwidth].initialization = segment_info.attrib["initialization"].replace("$RepresentationID$", representationId)
+                            media_object[bandwidth].start = int(segment_info.attrib.get("startNumber", 1))
+                            media_object[bandwidth].timescale = float(segment_info.attrib["timescale"])
+                            URL_LIST[bandwidth] = list()
+                            # Parse SegmentTimeline
+                            for timeline in segment_info:
+                                if "SegmentTimeline" in get_tag_name(timeline.tag):
+                                    video_segment_duration = None
+                                        
+                                    for segment in timeline:
+                                        if "S" in get_tag_name(segment.tag):
+                                            duration = float(segment.attrib["d"])
+                                            repeat = int(segment.attrib.get("r", 0)) + media_object[bandwidth].start
+                                            if video_segment_duration is None:
+                                                    video_segment_duration = duration / media_object[bandwidth].timescale
+                                            for i in range(repeat):
+                                                media_url = media_object[bandwidth].base_url.replace("$Number%05d$", f"{i+media_object[bandwidth].start:05d}")
+                                                media_object[bandwidth].url_list.append(media_url)
+                            URL_LIST[bandwidth] = [media_object[bandwidth].initialization] + media_object[bandwidth].url_list
+                                        
 
     else:
 
         print("Error: UknownFormat of MPD file!")
-
+    # config_dash.LOG.info(f"Media URL Template: {media_object[bandwidth].base_url}")
+    # config_dash.LOG.info(f"Initialization URL: {media_object[bandwidth].initialization}")
+    # config_dash.LOG.info(f"Segment Sizes: {media_object[bandwidth].segment_sizes}")
+    # print(f"url_list: {media_object[bandwidth].url_list}")
+    # print(f"dashplayback: {dashplayback.video[bandwidth].url_list}")
+    # print(f"original bandwidth: {bandwidth}")
+    # print(f"video_segment_duration: {video_segment_duration}")
     return dashplayback, float(video_segment_duration)

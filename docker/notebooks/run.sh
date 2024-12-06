@@ -1,3 +1,3 @@
 #!/bin/bash
 
-cd /docker/mininettest/ && python /docker/mininettest/seung_demo.py --scheduler random --rtt 0
+cd /data/AggDeliv/mpquic-rl/docker/mininettest/ && python /data/AggDeliv/mpquic-rl/docker/mininettest/seung_demo.py --scheduler random --rtt 0

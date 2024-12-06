@@ -4,6 +4,7 @@ cd ../MAppLE/caddy/caddy
 
 # Current path: /MAppLE/caddy/caddy
 echo "Build the caddy server..."
+pwd
 go build
 if [ $? -ne 0 ]; then { echo "Failed, aborting." ; exit 1; } fi
 
