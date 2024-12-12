@@ -14,6 +14,7 @@ import (
 	"bitbucket.com/marcmolla/gorl/agents"
 	"bitbucket.com/marcmolla/gorl/types"
 	"gonum.org/v1/gonum/mat"
+	"mpquic_SAC/policy" // Import the shared policy package
 )
 
 const banditAlpha = 0.75
@@ -30,6 +31,8 @@ type scheduler struct {
 	TrainingAgent agents.TrainingAgent
 	// Normal Agent
 	Agent agents.Agent
+
+	SACPolicy scheduler_SACPolicy.SACPolicy
     
 	// Cached state for training
 	cachedState		types.Vector
@@ -1158,6 +1161,70 @@ func (sch *scheduler) selectPathDQNAgent(s *session, hasRetransmission bool, has
 	return paths[action]
 }
 
+func (sch *scheduler) selectPathSACAgent(s *session, hasRetransmission bool, hasStreamRetransmission bool, fromPth *path) *path {
+	if len(s.paths) <= 1 {
+		return s.paths[protocol.InitialPathID]
+	}
+
+	// Get the list of available paths
+	var availablePaths []protocol.PathID
+	for pathID, path := range s.paths {
+		if path.SendingAllowed() && pathID != protocol.InitialPathID {
+			availablePaths = append(availablePaths, pathID)
+		}
+	}
+
+	// Handle cases with no available paths
+	if len(availablePaths) == 0 {
+		return s.paths[protocol.InitialPathID]
+	} else if len(availablePaths) == 1 {
+		return s.paths[availablePaths[0]]
+	}
+
+	// Sample a path index based on the current policy
+	sampledIndex := SamplePath()
+
+	// Map the sampled index to an actual path
+	if sampledIndex < len(availablePaths) {
+		return s.paths[availablePaths[sampledIndex]]
+	}
+
+	// Fallback to the first path
+	return s.paths[availablePaths[0]]
+}
+
+
+func (sch *scheduler) selectPathSAC(s *session, hasRetransmission bool, hasStreamRetransmission bool, fromPth *path) *path {
+	if len(s.paths) <= 1 {
+		// Single path case
+		if !hasRetransmission && !s.paths[protocol.InitialPathID].SendingAllowed() {
+			return nil
+		}
+		return s.paths[protocol.InitialPathID]
+	}
+
+	// Retrieve action (path) based on the current policy
+	action := policy.getAction()
+	var paths []*path
+
+	// Collect available paths
+	for _, path := range s.paths {
+		if path.SendingAllowed() {
+			paths = append(paths, path)
+		}
+	}
+
+	if len(paths) == 0 {
+		return s.paths[protocol.InitialPathID]
+	}
+
+	if action < len(paths) {
+		return paths[action] // Select path based on action
+	}
+
+	return paths[0] // Fallback to the first path
+}
+
 // Lock of s.paths must be held
 func (sch *scheduler) selectPath(s *session, hasRetransmission bool, hasStreamRetransmission bool, fromPth *path) *path {
 	// XXX Currently round-robin
@@ -1177,11 +1244,12 @@ func (sch *scheduler) selectPath(s *session, hasRetransmission bool, hasStreamRe
 		return sch.selectPathDQNAgent(s, hasRetransmission, hasStreamRetransmission, fromPth)
 	}else if sch.SchedulerName == "primary" {
 		return sch.selectFirstPath(s, hasRetransmission, hasStreamRetransmission, fromPth)
-	}else if sch.SchedulerName == "rl" {
-			return sch.selectPathReinforcementLearning(s, hasRetransmission, hasStreamRetransmission, fromPth)
-		
-	
-	}else{
+	}else if sch.SchedulerName == "dqn" {
+		return sch.selectPathReinforcementLearning(s, hasRetransmission, hasStreamRetransmission, fromPth)
+	}else if sch.SchedulerName == "sacAgent"{
+		return sch.selectPathSACAgent(s, hasRetransmission, hasStreamRetransmission, fromPth)
+	}
+	else{
 		panic("unknown scheduler selected")
 		// Default, rtt
 		return sch.selectPathLowLatency(s, hasRetransmission, hasStreamRetransmission, fromPth)

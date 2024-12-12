@@ -1,6 +1,8 @@
 syntax = "proto3";
 
-package mpquic;
+package mpquic_SAC;
+
+option go_package = "./mpquic_SAC";
 
 // Define the PathInfo message
 message PathInfo {
@@ -16,7 +18,7 @@ message PathInfo {
 
 // Define the AggDelivState message
 message AggDelivState {
-    string resolution_type = 1;
+    int32 resolution_type = 1;
     repeated PathInfo paths_info = 2;
     int32 bitrate = 3;
 }
@@ -24,4 +26,8 @@ message AggDelivState {
 // Define the service
 service MPQUICService {
     rpc SelectPath (AggDelivState) returns (PathInfo);
+}
+
+message Policy {
+    repeated double path_probabilities = 1;  // Probabilities for each path
 }
