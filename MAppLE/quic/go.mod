@@ -1,4 +1,4 @@
-module github.com/lucas-clemente/quic-go
+module github.com/BeIanChang/SAC/quic
 
 go 1.14
 
@@ -25,7 +25,6 @@ require (
 	gopkg.in/check.v1 v1.0.0-20190902080502-41f04d3bba15 // indirect
 	gorgonia.org/gorgonia v0.9.9
 	gorgonia.org/tensor v0.9.4
-    github.com/BeIanChang/SAC/quic
 )
 
 replace bitbucket.com/marcmolla/gorl => ../gorl
