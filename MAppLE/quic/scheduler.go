@@ -1182,7 +1182,7 @@ func (sch *scheduler) selectPathSACAgent(s *session, hasRetransmission bool, has
 	}
 
 	// Sample a path index based on the current policy
-	sampledIndex := SamplePath()
+	sampledIndex := currentPolicy.getAction()
 
 	// Map the sampled index to an actual path
 	if sampledIndex < len(availablePaths) {

@@ -25,11 +25,10 @@ require (
 	gopkg.in/check.v1 v1.0.0-20190902080502-41f04d3bba15 // indirect
 	gorgonia.org/gorgonia v0.9.9
 	gorgonia.org/tensor v0.9.4
-    github.com/BeIanChang/SAC/MAppLE/peekaboo/mpquic_SAC v0.0.0
+    github.com/BeIanChang/SAC/quic
 )
 
 replace bitbucket.com/marcmolla/gorl => ../gorl
 
 replace github.com/bifurcation/mint => ../mint-a6080d464fb57a9330c2124ffb62f3c233e3400e
 
-replace github.com/BeIanChang/SAC/MAppLE/mpquic_SAC => ../mpquic_SAC
